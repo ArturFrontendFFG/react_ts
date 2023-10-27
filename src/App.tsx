@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { UserPage } from "./components/UserPage";
+import { TodosPage } from "./components/TodosPage";
+import { Link } from "react-router-dom";
+import { UserItemPage } from "./components/UserItemPage";
 
-function App() {
+export const App = () => {
+  const styleNav = {
+    fontSize: 22,
+    color: "black",
+    display: "flex",
+    gap: 50,
+    margin: "20px 0",
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    // <div>
+    //   {/* <EventsExample/> */}
+    //   {/* <Card
+    //     onClick={(num) => console.log("Click and", num)}
+    //     variant={CardVariant.primary}
+    //     width="100px"
+    //     height="100px"
+    //   >
+    //     <button>Click</button>
+    //   </Card> */}
 
-export default App;
+    // </div>
+    <BrowserRouter>
+      <header>
+        <nav style={styleNav}>
+          <Link to={"/users"}>Users</Link>
+          <Link to={"/todos"}>Todos</Link>
+        </nav>
+      </header>
+      <Routes>
+        <Route path="/users" element={<UserPage />} />
+        <Route path="/todos" element={<TodosPage />} />
+        <Route path="/users/:id" element={<UserItemPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
